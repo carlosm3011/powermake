@@ -6,6 +6,8 @@ import subprocess
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Dict, Any
+from urllib.parse import urlparse
+import requests
 
 
 class PowerMakeError(Exception):
@@ -147,6 +149,49 @@ class WriteFileNode(Node):
             raise NodeExecutionError(f"WriteFile node '{self.node_id}' failed: {e}")
 
 
+class HttpGetFileNode(Node):
+    """Node that downloads a file from an HTTP(S) URL."""
+    
+    def validate(self, node_outputs: Dict[str, Path]) -> None:
+        if 'url' not in self.config:
+            raise NodeValidationError(f"HttpGetFile node '{self.node_id}' missing 'url' field")
+        
+        url = self.config['url']
+        try:
+            parsed_url = urlparse(url)
+            if not parsed_url.scheme or parsed_url.scheme not in ['http', 'https']:
+                raise NodeValidationError(f"HttpGetFile node '{self.node_id}': Invalid URL scheme. Must be http or https")
+            if not parsed_url.netloc:
+                raise NodeValidationError(f"HttpGetFile node '{self.node_id}': Invalid URL format")
+        except Exception as e:
+            raise NodeValidationError(f"HttpGetFile node '{self.node_id}': Invalid URL '{url}': {e}")
+    
+    def execute(self, node_outputs: Dict[str, Path]) -> Path:
+        url = self.config['url']
+        
+        # Extract filename from URL or use a default
+        parsed_url = urlparse(url)
+        filename = Path(parsed_url.path).name
+        if not filename:
+            filename = "downloaded_file"
+        
+        output_path = self.tmp_dir / f"{self.node_id}_{filename}"
+        
+        try:
+            response = requests.get(url, stream=True, timeout=30)
+            response.raise_for_status()
+            
+            with open(output_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            
+            return output_path
+        except requests.exceptions.RequestException as e:
+            raise NodeExecutionError(f"HttpGetFile node '{self.node_id}' failed to download '{url}': {e}")
+        except Exception as e:
+            raise NodeExecutionError(f"HttpGetFile node '{self.node_id}' failed: {e}")
+
+
 def create_node(config: Dict[str, Any], tmp_dir: Path) -> Node:
     """Factory function to create appropriate node instances."""
     node_type = config.get('node', '').lower()
@@ -157,5 +202,7 @@ def create_node(config: Dict[str, Any], tmp_dir: Path) -> Node:
         return RunScriptNode(config, tmp_dir)
     elif node_type == 'writefile':
         return WriteFileNode(config, tmp_dir)
+    elif node_type == 'httpgetfile':
+        return HttpGetFileNode(config, tmp_dir)
     else:
         raise NodeValidationError(f"Unknown node type: {node_type}")

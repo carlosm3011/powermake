@@ -93,6 +93,8 @@ class Pipeline:
                 description = f"Run: {node.config.get('path', 'N/A')}"
             elif node.node_type == "writefile":
                 description = f"Write to: {node.config.get('output', 'N/A')}"
+            elif node.node_type == "httpgetfile":
+                description = f"Download: {node.config.get('url', 'N/A')}"
             
             table.add_row(str(i+1), node.node_id, node.node_type, description)
         
