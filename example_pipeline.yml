@@ -1,0 +1,12 @@
+- node: readfile 
+  path: example_data.csv
+  id: examplecsv
+
+- node: runscript
+  path: ./process_data.sh ${examplecsv}
+  id: processed_data
+
+- node: writefile
+  input: processed_data
+  output: output/result.txt
+  id : result

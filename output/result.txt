@@ -1,0 +1,12 @@
+Processing data from: .tmp/examplecsv_example_data.csv
+--- Data Summary ---
+       4 .tmp/examplecsv_example_data.csv
+--- First 3 lines ---
+name,age,city
+Alice,25,New York
+Bob,30,San Francisco
+--- Cities ---
+Boston
+Chicago
+New York
+San Francisco
