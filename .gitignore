@@ -1,1 +1,4 @@
 .tmp/
+*pycache*
+*.pyc
+powermake/__pycache__/nodes.cpython-313.pyc
