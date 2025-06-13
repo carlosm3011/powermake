@@ -173,3 +173,21 @@ python -m pytest tests/
     ├── test_nodes.py
     └── test_pipeline.py
 ```
+
+## Features Included in v1
+
+ YAML pipeline specification parser  
+ CLI interface with Typer  
+ Four core node types (readfile, runscript, writefile, httpgetfile)  
+ Progress tracking with timing  
+ Comprehensive validation and error checking  
+ Rich error messages  
+ Unit test coverage  
+ Temporary file management  
+
+## Future Enhancements (Not in v1)
+
+- Dependency calculation among nodes
+- Parallel execution
+- Additional node types
+- Pipeline caching and resumption
