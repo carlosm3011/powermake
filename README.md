@@ -51,3 +51,29 @@ pip install -e .
 ```bash
 python -m powermake.cli pipeline.yml
 ```
+
+### Command Line Options
+
+- `--tmp-dir, -t`: Specify temporary directory (default: `.tmp/` in pipeline file directory)
+- `--verbose, -v`: Enable verbose output
+- `--help`: Show help message
+
+### Example
+
+Using Poetry:
+```bash
+poetry run python -m powermake.cli example_pipeline.yml --verbose --tmp-dir /tmp/powermake
+```
+
+Using pip installation:
+```bash
+python -m powermake.cli example_pipeline.yml --verbose --tmp-dir /tmp/powermake
+```
+
+## Pipeline Specification
+
+A PowerMake pipeline is defined as a YAML list of nodes. Each node has:
+- `node`: The node type (`readfile`, `runscript`, `writefile`, or `httpgetfile`)
+- `id`: A unique identifier for the node
+- Additional fields specific to the node type
+
