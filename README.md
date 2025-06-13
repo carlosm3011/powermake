@@ -77,3 +77,32 @@ A PowerMake pipeline is defined as a YAML list of nodes. Each node has:
 - `id`: A unique identifier for the node
 - Additional fields specific to the node type
 
+### Node Types
+
+#### ReadFile Node
+Reads a file and copies it to the temporary directory.
+
+```yaml
+- node: readfile
+  path: /path/to/input.csv
+  id: input_data
+```
+
+#### RunScript Node
+Executes a script/command and captures its output.
+
+```yaml
+- node: runscript
+  path: ./process.sh ${input_data}  # ${node_id} variables are expanded
+  id: processed_data
+```
+
+#### WriteFile Node
+Writes the output of a previous node to a specified location.
+
+```yaml
+- node: writefile
+  input: processed_data  # References another node's ID
+  output: /path/to/result.txt
+  id: final_output
+```
