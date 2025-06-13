@@ -139,3 +139,10 @@ Downloads a file from an HTTP(S) URL to the temporary directory.
 
 ## Development
 
+### Running Tests
+
+```bash
+python -m pytest tests/
+```
+
+### Project Structure
