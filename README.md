@@ -148,5 +148,5 @@ python -m pytest tests/
 ### Project Structure
 
 ```
-powermake
+powermake/
 ```
