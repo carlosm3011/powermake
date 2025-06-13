@@ -176,14 +176,14 @@ python -m pytest tests/
 
 ## Features Included in v1
 
- YAML pipeline specification parser  
- CLI interface with Typer  
- Four core node types (readfile, runscript, writefile, httpgetfile)  
- Progress tracking with timing  
- Comprehensive validation and error checking  
- Rich error messages  
- Unit test coverage  
- Temporary file management  
+  - YAML pipeline specification parser 
+  - CLI interface with Typer  
+  - Four core node types (readfile, runscript, writefile, httpgetfile)  
+  - Progress tracking with timing  
+  - Comprehensive validation and error checking  
+  - Rich error messages  
+  - Unit test coverage  
+  - Temporary file management  
 
 ## Future Enhancements (Not in v1)
 
