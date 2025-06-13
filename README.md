@@ -31,3 +31,23 @@ poetry install
 ```bash
 poetry run python -m powermake.cli pipeline.yml
 ```
+
+### Using pip
+
+1. Install dependencies:
+```bash
+pip install typer pyyaml rich requests pytest
+```
+
+2. Install PowerMake (development mode):
+```bash
+pip install -e .
+```
+
+## Usage
+
+### Basic Usage
+
+```bash
+python -m powermake.cli pipeline.yml
+```
