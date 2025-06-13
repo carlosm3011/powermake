@@ -148,5 +148,28 @@ python -m pytest tests/
 ### Project Structure
 
 ```
-powermake/
+❯ tree --gitignore
+.
+├── DESIGN.md
+├── LICENSE
+├── output
+│   └── result.txt
+├── poetry.lock
+├── powermake
+│   ├── __init__.py
+│   ├── cli.py
+│   ├── nodes.py
+│   └── pipeline.py
+├── pyproject.toml
+├── README.md
+├── test_basic.py
+├── test_nodes_only.py
+├── test_pipeline
+│   ├── example_data.csv
+│   ├── example_pipeline.yml
+│   └── process_data.sh
+└── tests
+    ├── __init__.py
+    ├── test_nodes.py
+    └── test_pipeline.py
 ```
