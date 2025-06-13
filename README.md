@@ -15,3 +15,19 @@ An enhanced version of a makefile-style workflow manager that executes pipelines
   - **Rich error messages**: Detailed validation and execution error reporting
   - **Sanity checking**: Validates pipeline syntax and file existence before execution
   - **Temporary file management**: Automatic handling of intermediate files
+
+## Installation
+
+### Using Poetry (Recommended)
+
+1. Install dependencies:
+
+```bash
+poetry install
+```
+
+2. Run PowerMake:
+
+```bash
+poetry run python -m powermake.cli pipeline.yml
+```
